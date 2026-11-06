@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Minha Rotina</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4A90E2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Minha Rotina">
+  <link rel="apple-touch-icon" href="icon.png">
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --bg: #F8FBFF;
+      --card: #FFFFFF;
+      --text: #2C3E50;
+      --muted: #7F8C8D;
+      --success: #27AE60;
+      --border: #E8EEF4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 16px 16px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 1.4rem; font-weight: 600; }
+    .date { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+    .progress-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: white;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    nav {
+      display: flex;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 78px;
+      z-index: 99;
+    }
+    nav button {
+      flex: 1;
+      padding: 14px 8px;
+      border: none;
+      background: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+    nav button.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .section { display: none; padding: 16px; }
+    .section.active { display: block; }
+    .task {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .task.current { border-left: 4px solid var(--primary); background: #F0F7FF; }
+    .task.done { opacity: 0.6; }
+    .task.done .task-text { text-decoration: line-through; }
+    input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+    .task-time { font-weight: 600; color: var(--primary); min-width: 52px; font-size: 0.9rem; }
+    .task-text { flex: 1; }
+    .task-text strong { display: block; }
+    .task-text span { font-size: 0.85rem; color: var(--muted); }
+    .zone-card, .focus-card {
+      background: linear-gradient(135deg, #E8F4FD, #FFFFFF);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #D0E6F7;
+    }
+    .zone-card h3, .focus-card h3 { color: var(--primary); margin-bottom: 6px; }
+    .non-neg { margin-top: 20px; }
+    .non-neg h3 { margin-bottom: 10px; font-size: 1.1rem; }
+    .reset-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background: #E74C3C;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .install-hint {
+      background: #FFF8E1;
+      border: 1px solid #FFE082;
+      border-radius: 10px;
+      padding: 12px;
+      margin: 16px;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Minha Rotina</h1>
+    <div class="date" id="currentDate"></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </header>
+
+  <nav>
+    <button class="active" data-tab="rotina">Rotina Completa</button>
+    <button data-tab="criancas">Crianças</button>
+    <button data-tab="casa">Casa</button>
+  </nav>
+
+  <div class="install-hint" id="installHint">
+    Para usar como app: no Safari, toque em Compartilhar → Adicionar à Tela de Início
+  </div>
+
+  <div id="rotina" class="section active"></div>
+  <div id="criancas" class="section"></div>
+  <div id="casa" class="section"></div>
+
+  <button class="reset-btn" onclick="resetToday()">Reiniciar tarefas de hoje</button>
+  <footer>Feito com carinho para ajudar no dia a dia • Use o método Fly Lady</footer>
+
+  <script>
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+    document.getElementById('currentDate').textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+
+    const dayIndex = today.getDay(); // 0 = Sunday
+
+    const zones = {
+      1: 'Sala e Cozinha',
+      2: 'Banheiros e Lavanderia',
+      3: 'Quartos',
+      4: 'Entrada e áreas comuns',
+      5: 'Manutenção geral'
+    };
+    const focuses = {
+      1: 'Estudo (Mestrado em Segurança de Dados)',
+      2: 'Trabalho (Agência / Freelance)',
+      3: 'Pesquisa',
+      4: 'Trabalho (Agência / Freelance)',
+      5: 'Estudo (Mestrado em Segurança de Dados)',
+      6: 'Família e Lazer',
+      0: 'Meal Prep (congelados e marmitas) + Descanso'
+    };
+
+    const currentZone = zones[dayIndex] || 'Flexível';
+    const currentFocus = focuses[dayIndex] || 'Livre';
+
+    // Rotina completa (ajustável)
+    const routine = [
+      { time: '06:00', title: 'Acordar e Ler a Bíblia', desc: 'Começar o dia com Deus' },
+      { time: '06:20', title: 'Preparar café da manhã das crianças', desc: '' },
+      { time: '06:40', title: 'Café da manhã das crianças', desc: 'Alimentação essencial' },
+      { time: '07:00', title: 'Meu banho', desc: 'Não negociável da casa' },
+      { time: '07:20', title: 'Alfabetização com o mais velho', desc: 'Momento separado' },
+      { time: '07:50', title: 'Alfabetização com o do meio', desc: 'Momento separado' },
+      { time: '08:20', title: 'Momento de lazer juntos', desc: 'Brincadeiras, desenho, etc.' },
+      { time: '09:00', title: 'Rotina da casa', desc: 'Não negociáveis + zona do dia: ' + currentZone },
+      { time: '10:00', title: 'Começar a preparar o almoço', desc: 'Horário tranquilo' },
+      { time: '11:30', title: 'Almoço da família', desc: '' },
+      { time: '12:15', title: 'Preparar para sair e levar para a escola', desc: '' },
+      { time: '13:00', title: 'Foco da tarde: ' + currentFocus, desc: 'Seu momento de estudo/trabalho/pesquisa' },
+      { time: '15:30', title: 'Pausa e lanche pessoal', desc: '' },
+      { time: '18:00', title: 'Chegar em casa com as crianças', desc: '' },
+      { time: '18:15', title: 'Lanche / jantar', desc: 'Alimentação essencial' },
+      { time: '18:45', title: 'Banho das crianças', desc: '' },
+      { time: '19:15', title: 'Devocional / momento calmo', desc: '' },
+      { time: '19:45', title: 'Escovar dentes e preparar para dormir', desc: 'Dormir cedo' },
+      { time: '20:15', title: 'Crianças dormindo', desc: 'Seu tempo pessoal restante' }
+    ];
+
+    const criancas = [
+      { title: 'Escovar os dentes (manhã)', desc: '' },
+      { title: 'Escovar os dentes (noite)', desc: '' },
+      { title: 'Café da manhã', desc: '' },
+      { title: 'Almoço', desc: '' },
+      { title: 'Lanche', desc: '' },
+      { title: 'Jantar', desc: '' },
+      { title: 'Atividades de alfabetização', desc: 'Com cada um separadamente' },
+      { title: 'Devocional', desc: '' },
+      { title: 'Momento de lazer', desc: '' },
+      { title: 'Levar / buscar na escola', desc: 'Dias úteis' },
+      { title: 'Dormir cedo', desc: '' }
+    ];
+
+    const casa = [
+      { title: 'Pia da cozinha limpa (sem louça)', desc: 'Não negociável' },
+      { title: 'Lixo tirado', desc: 'Não negociável' },
+      { title: 'Roupas sujas separadas ou lavando', desc: 'Não negociável' },
+      { title: 'Camas arrumadas', desc: 'Não negociável' },
+      { title: 'Eu tomei banho', desc: 'Não negociável' },
+      { title: 'Zona do dia: ' + currentZone, desc: 'Foco Fly Lady' }
+    ];
+
+    function getStorageKey(section) {
+      const d = today.toISOString().split('T')[0];
+      return `rotina_${section}_${d}`;
+    }
+
+    function loadState(section) {
+      const raw = localStorage.getItem(getStorageKey(section));
+      return raw ? JSON.parse(raw) : {};
+    }
+
+    function saveState(section, state) {
+      localStorage.setItem(getStorageKey(section), JSON.stringify(state));
+    }
+
+    function renderSection(containerId, items, sectionKey, hasTime = false) {
+      const container = document.getElementById(containerId);
+      const state = loadState(sectionKey);
+      let html = '';
+
+      if (sectionKey === 'rotina') {
+        html += `<div class="focus-card"><h3>Foco de hoje</h3><p>${currentFocus}</p></div>`;
+        html += `<div class="zone-card"><h3>Zona da casa hoje</h3><p>${currentZone}</p></div>`;
+      }
+
+      items.forEach((item, i) => {
+        const id = `${sectionKey}_${i}`;
+        const checked = state[id] ? 'checked' : '';
+        const doneClass = state[id] ? 'done' : '';
+        const currentClass = isCurrent(item.time) ? 'current' : '';
+        html += `
+          <div class="task ${doneClass} ${currentClass}">
+            <input type="checkbox" id="${id}" ${checked} onchange="toggleTask('${sectionKey}', '${id}', this.checked)">
+            <label for="${id}" class="task-text">
+              ${hasTime ? `<div class="task-time">${item.time}</div>` : ''}
+              <strong>${item.title}</strong>
+              ${item.desc ? `<span>${item.desc}</span>` : ''}
+            </label>
+          </div>`;
+      });
+
+      container.innerHTML = html;
+      updateProgress();
+    }
+
+    function isCurrent(timeStr) {
+      if (!timeStr) return false;
+      const now = new Date();
+      const [h, m] = timeStr.split(':').map(Number);
+      const taskTime = new Date();
+      taskTime.setHours(h, m, 0, 0);
+      const next = new Date(taskTime.getTime() + 40 * 60000); // approx next
+      return now >= taskTime && now < next;
+    }
+
+    function toggleTask(section, id, checked) {
+      const state = loadState(section);
+      state[id] = checked;
+      saveState(section, state);
+      const taskEl = document.getElementById(id).closest('.task');
+      if (checked) taskEl.classList.add('done');
+      else taskEl.classList.remove('done');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('#rotina input[type="checkbox"]');
+      const total = checkboxes.length;
+      const done = document.querySelectorAll('#rotina input[type="checkbox"]:checked').length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+    }
+
+    function resetToday() {
+      if (confirm('Reiniciar todas as tarefas de hoje?')) {
+        localStorage.removeItem(getStorageKey('rotina'));
+        localStorage.removeItem(getStorageKey('criancas'));
+        localStorage.removeItem(getStorageKey('casa'));
+        location.reload();
+      }
+    }
+
+    // Tabs
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Initial render
+    renderSection('rotina', routine, 'rotina', true);
+    renderSection('criancas', criancas, 'criancas');
+    renderSection('casa', casa, 'casa');
+
+    // Hide install hint after a while or if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      document.getElementById('installHint').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
