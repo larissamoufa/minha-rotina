@@ -1,0 +1,24 @@
+{
+  "name": "Minha Rotina",
+  "short_name": "Rotina",
+  "description": "Aplicativo pessoal para gerir a rotina diária com as crianças e a casa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FBFF",
+  "theme_color": "#4A90E2",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
