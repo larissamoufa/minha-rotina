@@ -5,91 +5,135 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Minha Rotina</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#4A90E2">
+  <meta name="theme-color" content="#D4A574">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Minha Rotina">
   <link rel="apple-touch-icon" href="icon.png">
   <style>
     :root {
-      --primary: #4A90E2;
-      --bg: #F8FBFF;
+      --primary: #C48B6A;
+      --primary-dark: #A67C5D;
+      --bg: #FDF8F3;
       --card: #FFFFFF;
-      --text: #2C3E50;
-      --muted: #7F8C8D;
-      --success: #27AE60;
-      --border: #E8EEF4;
+      --text: #3E3429;
+      --muted: #8A7E72;
+      --border: #F0E6DC;
+      --espiritual: #E8D5C4;
+      --criancas: #F5D6C6;
+      --casa: #D4E8D0;
+      --alimentacao: #F8E6C8;
+      --pessoal: #D6E4F0;
+      --lazer: #E6D6F0;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Georgia", serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.55;
       padding-bottom: 80px;
     }
     header {
-      background: var(--primary);
+      background: linear-gradient(135deg, #E8C9A8 0%, #D4A574 100%);
       color: white;
-      padding: 16px 16px 12px;
+      padding: 20px 16px 14px;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(180,140,100,0.15);
     }
-    header h1 { font-size: 1.4rem; font-weight: 600; }
-    .date { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+    header h1 { font-size: 1.5rem; font-weight: 500; letter-spacing: 0.3px; }
+    .date { font-size: 0.88rem; opacity: 0.95; margin-top: 4px; font-weight: 400; }
     .progress-bar {
-      height: 6px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 3px;
-      margin-top: 10px;
+      height: 8px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 4px;
+      margin-top: 12px;
       overflow: hidden;
     }
     .progress-fill {
       height: 100%;
       background: white;
       width: 0%;
-      transition: width 0.3s;
+      transition: width 0.4s ease;
+      border-radius: 4px;
     }
     nav {
       display: flex;
       background: white;
       border-bottom: 1px solid var(--border);
       position: sticky;
-      top: 78px;
+      top: 92px;
       z-index: 99;
     }
     nav button {
       flex: 1;
-      padding: 14px 8px;
+      padding: 15px 8px;
       border: none;
       background: none;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 500;
       color: var(--muted);
       cursor: pointer;
       border-bottom: 3px solid transparent;
+      transition: all 0.2s;
     }
     nav button.active {
-      color: var(--primary);
+      color: var(--primary-dark);
       border-bottom-color: var(--primary);
     }
     .section { display: none; padding: 16px; }
     .section.active { display: block; }
+    .verse-card {
+      background: linear-gradient(145deg, #FFF9F2, #F5EDE4);
+      border: 1px solid #E8D5C4;
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      margin-bottom: 18px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(180,140,100,0.08);
+    }
+    .verse-card h3 {
+      color: var(--primary-dark);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .verse-card p {
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: #4A3F35;
+      margin-bottom: 6px;
+    }
+    .verse-card .ref {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
     .task {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin-bottom: 12px;
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border-left: 5px solid transparent;
     }
-    .task.current { border-left: 4px solid var(--primary); background: #F0F7FF; }
-    .task.done { opacity: 0.6; }
+    .task.espiritual { border-left-color: #C4A484; background: #FFF8F3; }
+    .task.criancas { border-left-color: #E8A87C; background: #FFF6F1; }
+    .task.casa { border-left-color: #8FBC8F; background: #F6FAF5; }
+    .task.alimentacao { border-left-color: #E8C47C; background: #FFFBF3; }
+    .task.pessoal { border-left-color: #7BA7D1; background: #F5F9FD; }
+    .task.lazer { border-left-color: #B8A0D4; background: #F9F5FC; }
+    .task.current { box-shadow: 0 0 0 2px var(--primary); }
+    .task.done { opacity: 0.55; }
     .task.done .task-text { text-decoration: line-through; }
     input[type="checkbox"] {
       width: 22px;
@@ -98,39 +142,39 @@
       accent-color: var(--primary);
       flex-shrink: 0;
     }
-    .task-time { font-weight: 600; color: var(--primary); min-width: 52px; font-size: 0.9rem; }
+    .task-time { font-weight: 600; color: var(--primary-dark); min-width: 52px; font-size: 0.9rem; }
     .task-text { flex: 1; }
-    .task-text strong { display: block; }
-    .task-text span { font-size: 0.85rem; color: var(--muted); }
+    .task-text strong { display: block; font-weight: 600; }
+    .task-text span { font-size: 0.85rem; color: var(--muted); display: block; margin-top: 2px; }
     .zone-card, .focus-card {
-      background: linear-gradient(135deg, #E8F4FD, #FFFFFF);
-      border-radius: 12px;
+      background: linear-gradient(135deg, #F8F0E8, #FFFFFF);
+      border-radius: 14px;
       padding: 16px;
-      margin-bottom: 16px;
-      border: 1px solid #D0E6F7;
+      margin-bottom: 14px;
+      border: 1px solid #E8D5C4;
     }
-    .zone-card h3, .focus-card h3 { color: var(--primary); margin-bottom: 6px; }
-    .non-neg { margin-top: 20px; }
-    .non-neg h3 { margin-bottom: 10px; font-size: 1.1rem; }
+    .zone-card h3, .focus-card h3 { color: var(--primary-dark); margin-bottom: 6px; font-weight: 600; }
     .reset-btn {
       display: block;
-      margin: 20px auto;
-      padding: 12px 24px;
-      background: #E74C3C;
+      margin: 24px auto 10px;
+      padding: 13px 28px;
+      background: #D4A574;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-weight: 500;
       cursor: pointer;
+      font-size: 0.95rem;
     }
     .install-hint {
-      background: #FFF8E1;
-      border: 1px solid #FFE082;
-      border-radius: 10px;
+      background: #FFF6E8;
+      border: 1px solid #E8D5C4;
+      border-radius: 12px;
       padding: 12px;
       margin: 16px;
       font-size: 0.85rem;
       text-align: center;
+      color: #5C4A3A;
     }
     footer {
       text-align: center;
@@ -169,7 +213,7 @@
     const dateStr = today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
     document.getElementById('currentDate').textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
 
-    const dayIndex = today.getDay(); // 0 = Sunday
+    const dayIndex = today.getDay();
 
     const zones = {
       1: 'Sala e Cozinha',
@@ -191,50 +235,86 @@
     const currentZone = zones[dayIndex] || 'Flexível';
     const currentFocus = focuses[dayIndex] || 'Livre';
 
-    // Rotina completa (ajustável)
+    const verses = [
+      { text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1" },
+      { text: "Posso todas as coisas naquele que me fortalece.", ref: "Filipenses 4:13" },
+      { text: "Mas os que esperam no Senhor renovarão as suas forças.", ref: "Isaías 40:31" },
+      { text: "Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.", ref: "Provérbios 3:5" },
+      { text: "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.", ref: "Isaías 41:10" },
+      { text: "Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia.", ref: "Salmos 46:1" },
+      { text: "As misericórdias do Senhor são a causa de não sermos consumidos; renovam-se cada manhã.", ref: "Lamentações 3:22-23" },
+      { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", ref: "1 Pedro 5:7" },
+      { text: "Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele.", ref: "Salmos 118:24" },
+      { text: "Porque eu bem sei os planos que tenho para vocês, diz o Senhor, planos de paz e não de mal.", ref: "Jeremias 29:11" },
+      { text: "Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.", ref: "1 Tessalonicenses 5:18" },
+      { text: "Alegrai-vos sempre no Senhor; outra vez digo: alegrai-vos.", ref: "Filipenses 4:4" },
+      { text: "Não andeis ansiosos por coisa alguma; antes, em tudo, pela oração e súplica.", ref: "Filipenses 4:6" },
+      { text: "O Senhor te guiará continuamente e fartará a tua alma em lugares secos.", ref: "Isaías 58:11" },
+      { text: "Se Deus é por nós, quem será contra nós?", ref: "Romanos 8:31" },
+      { text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13" },
+      { text: "O Senhor é bom, é uma fortaleza no dia da angústia.", ref: "Naum 1:7" },
+      { text: "Não te desampares a ti mesmo; o Senhor é o teu Deus.", ref: "Josué 1:9" },
+      { text: "Bendito seja o Senhor, que diariamente carrega as nossas cargas.", ref: "Salmos 68:19" },
+      { text: "Eis que estou convosco todos os dias, até a consumação dos séculos.", ref: "Mateus 28:20" },
+      { text: "Aquietai-vos e sabei que eu sou Deus.", ref: "Salmos 46:10" },
+      { text: "O amor de Deus foi derramado em nossos corações pelo Espírito Santo.", ref: "Romanos 5:5" },
+      { text: "Buscai primeiro o reino de Deus e a sua justiça.", ref: "Mateus 6:33" },
+      { text: "Eu sou o caminho, a verdade e a vida.", ref: "João 14:6" },
+      { text: "A minha graça te basta, porque o meu poder se aperfeiçoa na fraqueza.", ref: "2 Coríntios 12:9" },
+      { text: "O Senhor é a minha luz e a minha salvação; a quem temerei?", ref: "Salmos 27:1" },
+      { text: "Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará.", ref: "Salmos 37:5" },
+      { text: "O choro pode durar uma noite, mas a alegria vem pela manhã.", ref: "Salmos 30:5" },
+      { text: "Deus é amor.", ref: "1 João 4:8" },
+      { text: "A paz de Deus, que excede todo o entendimento, guardará os vossos corações.", ref: "Filipenses 4:7" },
+      { text: "Tudo o que fizerdes, fazei-o de todo o coração, como para o Senhor.", ref: "Colossenses 3:23" }
+    ];
+
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+    const verseOfDay = verses[dayOfYear % verses.length];
+
     const routine = [
-      { time: '06:00', title: 'Acordar e Ler a Bíblia', desc: 'Começar o dia com Deus' },
-      { time: '06:20', title: 'Preparar café da manhã das crianças', desc: '' },
-      { time: '06:40', title: 'Café da manhã das crianças', desc: 'Alimentação essencial' },
-      { time: '07:00', title: 'Meu banho', desc: 'Não negociável da casa' },
-      { time: '07:20', title: 'Alfabetização com o mais velho', desc: 'Momento separado' },
-      { time: '07:50', title: 'Alfabetização com o do meio', desc: 'Momento separado' },
-      { time: '08:20', title: 'Momento de lazer juntos', desc: 'Brincadeiras, desenho, etc.' },
-      { time: '09:00', title: 'Rotina da casa', desc: 'Não negociáveis + zona do dia: ' + currentZone },
-      { time: '10:00', title: 'Começar a preparar o almoço', desc: 'Horário tranquilo' },
-      { time: '11:30', title: 'Almoço da família', desc: '' },
-      { time: '12:15', title: 'Preparar para sair e levar para a escola', desc: '' },
-      { time: '13:00', title: 'Foco da tarde: ' + currentFocus, desc: 'Seu momento de estudo/trabalho/pesquisa' },
-      { time: '15:30', title: 'Pausa e lanche pessoal', desc: '' },
-      { time: '18:00', title: 'Chegar em casa com as crianças', desc: '' },
-      { time: '18:15', title: 'Lanche / jantar', desc: 'Alimentação essencial' },
-      { time: '18:45', title: 'Banho das crianças', desc: '' },
-      { time: '19:15', title: 'Devocional / momento calmo', desc: '' },
-      { time: '19:45', title: 'Escovar dentes e preparar para dormir', desc: 'Dormir cedo' },
-      { time: '20:15', title: 'Crianças dormindo', desc: 'Seu tempo pessoal restante' }
+      { time: '06:00', title: 'Acordar e Ler a Bíblia', desc: 'Começar o dia com Deus', cat: 'espiritual' },
+      { time: '06:20', title: 'Preparar café da manhã das crianças', desc: '', cat: 'alimentacao' },
+      { time: '06:40', title: 'Café da manhã das crianças', desc: 'Alimentação essencial', cat: 'alimentacao' },
+      { time: '07:00', title: 'Meu banho', desc: 'Não negociável da casa', cat: 'pessoal' },
+      { time: '07:20', title: 'Alfabetização com o mais velho', desc: 'Momento separado', cat: 'criancas' },
+      { time: '07:50', title: 'Alfabetização com o do meio', desc: 'Momento separado', cat: 'criancas' },
+      { time: '08:20', title: 'Momento de lazer juntos', desc: 'Brincadeiras, desenho, etc.', cat: 'lazer' },
+      { time: '09:00', title: 'Rotina da casa', desc: 'Não negociáveis + zona do dia: ' + currentZone, cat: 'casa' },
+      { time: '10:00', title: 'Começar a preparar o almoço', desc: 'Horário tranquilo', cat: 'alimentacao' },
+      { time: '11:30', title: 'Almoço da família', desc: '', cat: 'alimentacao' },
+      { time: '12:15', title: 'Preparar para sair e levar para a escola', desc: '', cat: 'criancas' },
+      { time: '13:00', title: 'Foco da tarde: ' + currentFocus, desc: 'Seu momento de estudo/trabalho/pesquisa', cat: 'pessoal' },
+      { time: '15:30', title: 'Pausa e lanche pessoal', desc: '', cat: 'pessoal' },
+      { time: '18:00', title: 'Chegar em casa com as crianças', desc: '', cat: 'criancas' },
+      { time: '18:15', title: 'Lanche / jantar', desc: 'Alimentação essencial', cat: 'alimentacao' },
+      { time: '18:45', title: 'Banho das crianças', desc: '', cat: 'criancas' },
+      { time: '19:15', title: 'Devocional / momento calmo', desc: '', cat: 'espiritual' },
+      { time: '19:45', title: 'Escovar dentes e preparar para dormir', desc: 'Dormir cedo', cat: 'criancas' },
+      { time: '20:15', title: 'Crianças dormindo', desc: 'Seu tempo pessoal restante', cat: 'pessoal' }
     ];
 
     const criancas = [
-      { title: 'Escovar os dentes (manhã)', desc: '' },
-      { title: 'Escovar os dentes (noite)', desc: '' },
-      { title: 'Café da manhã', desc: '' },
-      { title: 'Almoço', desc: '' },
-      { title: 'Lanche', desc: '' },
-      { title: 'Jantar', desc: '' },
-      { title: 'Atividades de alfabetização', desc: 'Com cada um separadamente' },
-      { title: 'Devocional', desc: '' },
-      { title: 'Momento de lazer', desc: '' },
-      { title: 'Levar / buscar na escola', desc: 'Dias úteis' },
-      { title: 'Dormir cedo', desc: '' }
+      { title: 'Escovar os dentes (manhã)', desc: '', cat: 'criancas' },
+      { title: 'Escovar os dentes (noite)', desc: '', cat: 'criancas' },
+      { title: 'Café da manhã', desc: '', cat: 'alimentacao' },
+      { title: 'Almoço', desc: '', cat: 'alimentacao' },
+      { title: 'Lanche', desc: '', cat: 'alimentacao' },
+      { title: 'Jantar', desc: '', cat: 'alimentacao' },
+      { title: 'Atividades de alfabetização', desc: 'Com cada um separadamente', cat: 'criancas' },
+      { title: 'Devocional', desc: '', cat: 'espiritual' },
+      { title: 'Momento de lazer', desc: '', cat: 'lazer' },
+      { title: 'Levar / buscar na escola', desc: 'Dias úteis', cat: 'criancas' },
+      { title: 'Dormir cedo', desc: '', cat: 'criancas' }
     ];
 
     const casa = [
-      { title: 'Pia da cozinha limpa (sem louça)', desc: 'Não negociável' },
-      { title: 'Lixo tirado', desc: 'Não negociável' },
-      { title: 'Roupas sujas separadas ou lavando', desc: 'Não negociável' },
-      { title: 'Camas arrumadas', desc: 'Não negociável' },
-      { title: 'Eu tomei banho', desc: 'Não negociável' },
-      { title: 'Zona do dia: ' + currentZone, desc: 'Foco Fly Lady' }
+      { title: 'Pia da cozinha limpa (sem louça)', desc: 'Não negociável', cat: 'casa' },
+      { title: 'Lixo tirado', desc: 'Não negociável', cat: 'casa' },
+      { title: 'Roupas sujas separadas ou lavando', desc: 'Não negociável', cat: 'casa' },
+      { title: 'Camas arrumadas', desc: 'Não negociável', cat: 'casa' },
+      { title: 'Eu tomei banho', desc: 'Não negociável', cat: 'pessoal' },
+      { title: 'Zona do dia: ' + currentZone, desc: 'Foco Fly Lady', cat: 'casa' }
     ];
 
     function getStorageKey(section) {
@@ -257,8 +337,15 @@
       let html = '';
 
       if (sectionKey === 'rotina') {
-        html += `<div class="focus-card"><h3>Foco de hoje</h3><p>${currentFocus}</p></div>`;
-        html += `<div class="zone-card"><h3>Zona da casa hoje</h3><p>${currentZone}</p></div>`;
+        html += `
+          <div class="verse-card">
+            <h3>Versículo do Dia</h3>
+            <p>“${verseOfDay.text}”</p>
+            <div class="ref">${verseOfDay.ref}</div>
+          </div>
+          <div class="focus-card"><h3>Foco de hoje</h3><p>${currentFocus}</p></div>
+          <div class="zone-card"><h3>Zona da casa hoje</h3><p>${currentZone}</p></div>
+        `;
       }
 
       items.forEach((item, i) => {
@@ -266,8 +353,9 @@
         const checked = state[id] ? 'checked' : '';
         const doneClass = state[id] ? 'done' : '';
         const currentClass = isCurrent(item.time) ? 'current' : '';
+        const catClass = item.cat || '';
         html += `
-          <div class="task ${doneClass} ${currentClass}">
+          <div class="task ${doneClass} ${currentClass} ${catClass}">
             <input type="checkbox" id="${id}" ${checked} onchange="toggleTask('${sectionKey}', '${id}', this.checked)">
             <label for="${id}" class="task-text">
               ${hasTime ? `<div class="task-time">${item.time}</div>` : ''}
@@ -287,7 +375,7 @@
       const [h, m] = timeStr.split(':').map(Number);
       const taskTime = new Date();
       taskTime.setHours(h, m, 0, 0);
-      const next = new Date(taskTime.getTime() + 40 * 60000); // approx next
+      const next = new Date(taskTime.getTime() + 40 * 60000);
       return now >= taskTime && now < next;
     }
 
@@ -318,7 +406,6 @@
       }
     }
 
-    // Tabs
     document.querySelectorAll('nav button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -328,12 +415,10 @@
       });
     });
 
-    // Initial render
     renderSection('rotina', routine, 'rotina', true);
     renderSection('criancas', criancas, 'criancas');
     renderSection('casa', casa, 'casa');
 
-    // Hide install hint after a while or if already installed
     if (window.matchMedia('(display-mode: standalone)').matches) {
       document.getElementById('installHint').style.display = 'none';
     }
