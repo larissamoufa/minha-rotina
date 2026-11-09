@@ -28,117 +28,24 @@
       line-height: 1.5;
       padding-bottom: 90px;
     }
-    header {
-      padding: 28px 20px 16px;
-      text-align: center;
-    }
-    .logo {
-      font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia, serif;
-      font-size: 2.4rem;
-      font-weight: 400;
-      letter-spacing: 2px;
-      color: var(--green);
-    }
-    .logo-sub {
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-    .date {
-      margin-top: 12px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .progress-wrap {
-      margin: 16px 20px 0;
-      height: 4px;
-      background: #E8E0D6;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--green);
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-    .verse-card {
-      margin: 20px 20px 8px;
-      background: white;
-      border-radius: 18px;
-      padding: 22px 20px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(61,79,58,0.06);
-      border: 1px solid var(--border);
-    }
-    .verse-label {
-      font-size: 0.65rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--green-soft);
-      margin-bottom: 10px;
-    }
-    .verse-text {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      line-height: 1.55;
-      color: var(--text);
-    }
-    .verse-ref {
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .info-cards {
-      display: flex;
-      gap: 10px;
-      margin: 12px 20px 20px;
-    }
-    .info-card {
-      flex: 1;
-      background: white;
-      border-radius: 14px;
-      padding: 14px 12px;
-      text-align: center;
-      border: 1px solid var(--border);
-    }
-    .info-card h4 {
-      font-size: 0.7rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .info-card p {
-      font-size: 0.85rem;
-      color: var(--green);
-      font-weight: 500;
-    }
+    header { padding: 28px 20px 16px; text-align: center; }
+    .logo { font-family: "Didot", "Bodoni MT", "Playfair Display", Georgia, serif; font-size: 2.4rem; font-weight: 400; letter-spacing: 2px; color: var(--green); }
+    .logo-sub { font-size: 0.7rem; letter-spacing: 3px; color: var(--muted); margin-top: 2px; }
+    .date { margin-top: 12px; font-size: 0.9rem; color: var(--muted); }
+    .progress-wrap { margin: 16px 20px 0; height: 4px; background: #E8E0D6; border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--green); width: 0%; transition: width 0.4s ease; }
+    .verse-card { margin: 20px 20px 8px; background: white; border-radius: 18px; padding: 22px 20px; text-align: center; box-shadow: 0 4px 20px rgba(61,79,58,0.06); border: 1px solid var(--border); }
+    .verse-label { font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green-soft); margin-bottom: 10px; }
+    .verse-text { font-family: Georgia, serif; font-size: 1.15rem; font-style: italic; line-height: 1.55; }
+    .verse-ref { margin-top: 10px; font-size: 0.75rem; color: var(--muted); }
+    .info-cards { display: flex; gap: 10px; margin: 12px 20px 20px; }
+    .info-card { flex: 1; background: white; border-radius: 14px; padding: 14px 12px; text-align: center; border: 1px solid var(--border); }
+    .info-card h4 { font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .info-card p { font-size: 0.85rem; color: var(--green); font-weight: 500; }
     .section { display: none; padding: 0 20px; }
     .section.active { display: block; }
-    .task {
-      background: white;
-      border-radius: 16px;
-      padding: 16px 16px 16px 14px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      border: 1px solid var(--border);
-      position: relative;
-    }
-    .task::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 12px;
-      bottom: 12px;
-      width: 3px;
-      border-radius: 2px;
-      background: var(--green);
-    }
+    .task { background: white; border-radius: 16px; padding: 16px 16px 16px 14px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px; border: 1px solid var(--border); position: relative; }
+    .task::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px; border-radius: 2px; background: var(--green); }
     .task.espiritual::before { background: #C9A882; }
     .task.criancas::before { background: #E8B4A0; }
     .task.casa::before { background: #8FA67A; }
@@ -148,63 +55,26 @@
     .task.current { box-shadow: 0 0 0 2px var(--green); }
     .task.done { opacity: 0.5; }
     .task.done .task-title { text-decoration: line-through; }
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      margin-top: 2px;
-      accent-color: var(--green);
-      flex-shrink: 0;
-    }
-    .task-time {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--green);
-      min-width: 46px;
-    }
+    input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--green); flex-shrink: 0; }
+    .task-time { font-size: 0.75rem; font-weight: 600; color: var(--green); min-width: 46px; }
     .task-body { flex: 1; }
     .task-title { font-weight: 500; font-size: 0.95rem; }
     .task-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
-    nav.bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--green);
-      display: flex;
-      padding: 10px 0 18px;
-      border-radius: 20px 20px 0 0;
-      z-index: 100;
-    }
-    nav.bottom-nav button {
-      flex: 1;
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.65rem;
-      letter-spacing: 0.5px;
-      padding: 6px 0;
-      cursor: pointer;
-    }
-    nav.bottom-nav button.active {
-      color: white;
-    }
-    nav.bottom-nav button span {
-      display: block;
-      font-size: 1.3rem;
-      margin-bottom: 2px;
-    }
-    .reset-btn {
-      display: block;
-      margin: 30px auto 20px;
-      padding: 14px 32px;
-      background: var(--green);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-    }
+    .edit-controls { display: none; margin: 8px 0; }
+    .edit-mode .edit-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    .edit-mode .task-title, .edit-mode .task-time { display: none; }
+    .edit-input { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 0.9rem; width: 100%; }
+    .edit-input.time { width: 80px; }
+    .btn-small { background: var(--green); color: white; border: none; border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; cursor: pointer; }
+    .btn-small.danger { background: #C45C5C; }
+    .top-actions { display: flex; justify-content: center; gap: 10px; margin: 10px 20px; }
+    .top-actions button { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; }
+    .top-actions button.active { background: var(--green); color: white; border-color: var(--green); }
+    nav.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--green); display: flex; padding: 10px 0 18px; border-radius: 20px 20px 0 0; z-index: 100; }
+    nav.bottom-nav button { flex: 1; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 0.65rem; letter-spacing: 0.5px; padding: 6px 0; cursor: pointer; }
+    nav.bottom-nav button.active { color: white; }
+    nav.bottom-nav button span { display: block; font-size: 1.3rem; margin-bottom: 2px; }
+    .reset-btn { display: block; margin: 30px auto 20px; padding: 14px 32px; background: var(--green); color: white; border: none; border-radius: 30px; font-size: 0.9rem; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -214,6 +84,11 @@
     <div class="date" id="currentDate"></div>
   </header>
   <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="top-actions">
+    <button id="btnEdit" onclick="toggleEdit()">Editar rotina</button>
+    <button id="btnAdd" onclick="addTask()" style="display:none">+ Adicionar</button>
+  </div>
 
   <div id="rotina" class="section active"></div>
   <div id="criancas" class="section"></div>
@@ -229,8 +104,7 @@
 
   <script>
     const today = new Date();
-    const dateStr = today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
-    document.getElementById('currentDate').textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    document.getElementById('currentDate').textContent = today.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }).replace(/^./, c => c.toUpperCase());
 
     const dayIndex = today.getDay();
     const zones = { 1: 'Sala e Cozinha', 2: 'Banheiros e Lavanderia', 3: 'Quartos', 4: 'Entrada e áreas comuns', 5: 'Manutenção geral' };
@@ -248,22 +122,12 @@
       { text: "As misericórdias do Senhor renovam-se cada manhã.", ref: "Lamentações 3:22-23" },
       { text: "Lancem sobre ele toda a sua ansiedade.", ref: "1 Pedro 5:7" },
       { text: "Este é o dia que o Senhor fez.", ref: "Salmos 118:24" },
-      { text: "Porque eu bem sei os planos que tenho para vocês.", ref: "Jeremias 29:11" },
-      { text: "Em tudo dai graças.", ref: "1 Tessalonicenses 5:18" },
-      { text: "Alegrai-vos sempre no Senhor.", ref: "Filipenses 4:4" },
-      { text: "Não andeis ansiosos por coisa alguma.", ref: "Filipenses 4:6" },
-      { text: "O Senhor te guiará continuamente.", ref: "Isaías 58:11" },
-      { text: "Se Deus é por nós, quem será contra nós?", ref: "Romanos 8:31" },
-      { text: "O Senhor é a minha luz e a minha salvação.", ref: "Salmos 27:1" },
-      { text: "Entrega o teu caminho ao Senhor.", ref: "Salmos 37:5" },
-      { text: "A paz de Deus guardará os vossos corações.", ref: "Filipenses 4:7" },
-      { text: "Tudo o que fizerdes, fazei-o de todo o coração.", ref: "Colossenses 3:23" },
-      { text: "Eis que estou convosco todos os dias.", ref: "Mateus 28:20" }
+      { text: "Porque eu bem sei os planos que tenho para vocês.", ref: "Jeremias 29:11" }
     ];
     const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
     const verseOfDay = verses[dayOfYear % verses.length];
 
-    const routine = [
+    const defaultRoutine = [
       { time: '06:00', title: 'Acordar e Ler a Bíblia', desc: 'Começar o dia com Deus', cat: 'espiritual' },
       { time: '06:20', title: 'Preparar café das crianças', cat: 'alimentacao' },
       { time: '06:40', title: 'Café da manhã das crianças', cat: 'alimentacao' },
@@ -283,6 +147,9 @@
       { time: '19:45', title: 'Escovar dentes e dormir', cat: 'criancas' },
       { time: '20:15', title: 'Crianças dormindo', cat: 'pessoal' }
     ];
+
+    let routine = JSON.parse(localStorage.getItem('customRoutine')) || defaultRoutine;
+    let editMode = false;
 
     const criancas = [
       { title: 'Escovar dentes (manhã)', cat: 'criancas' },
@@ -307,16 +174,9 @@
       { title: 'Zona do dia: ' + currentZone, cat: 'casa' }
     ];
 
-    function getStorageKey(section) {
-      return `rotina_${section}_${today.toISOString().split('T')[0]}`;
-    }
-    function loadState(section) {
-      const raw = localStorage.getItem(getStorageKey(section));
-      return raw ? JSON.parse(raw) : {};
-    }
-    function saveState(section, state) {
-      localStorage.setItem(getStorageKey(section), JSON.stringify(state));
-    }
+    function getStorageKey(section) { return `rotina_${section}_${today.toISOString().split('T')[0]}`; }
+    function loadState(section) { const raw = localStorage.getItem(getStorageKey(section)); return raw ? JSON.parse(raw) : {}; }
+    function saveState(section, state) { localStorage.setItem(getStorageKey(section), JSON.stringify(state)); }
 
     function renderSection(containerId, items, sectionKey, hasTime = false) {
       const container = document.getElementById(containerId);
@@ -342,12 +202,18 @@
         const doneClass = state[id] ? 'done' : '';
         const currentClass = isCurrent(item.time) ? 'current' : '';
         html += `
-          <div class="task ${doneClass} ${currentClass} ${item.cat || ''}">
+          <div class="task ${doneClass} ${currentClass} ${item.cat || ''}" data-index="${i}">
             <input type="checkbox" id="${id}" ${checked} onchange="toggleTask('${sectionKey}', '${id}', this.checked)">
             <div class="task-body">
               ${hasTime && item.time ? `<div class="task-time">${item.time}</div>` : ''}
               <div class="task-title">${item.title}</div>
               ${item.desc ? `<div class="task-desc">${item.desc}</div>` : ''}
+              ${sectionKey === 'rotina' ? `
+                <div class="edit-controls">
+                  <input class="edit-input time" type="time" value="${item.time || ''}" onchange="updateTask(${i}, 'time', this.value)">
+                  <input class="edit-input" type="text" value="${item.title}" onchange="updateTask(${i}, 'title', this.value)">
+                  <button class="btn-small danger" onclick="deleteTask(${i})">Remover</button>
+                </div>` : ''}
             </div>
           </div>`;
       });
@@ -369,8 +235,7 @@
       const state = loadState(section);
       state[id] = checked;
       saveState(section, state);
-      const el = document.getElementById(id).closest('.task');
-      el.classList.toggle('done', checked);
+      document.getElementById(id).closest('.task').classList.toggle('done', checked);
       updateProgress();
     }
 
@@ -378,6 +243,36 @@
       const boxes = document.querySelectorAll('#rotina input[type="checkbox"]');
       const pct = boxes.length ? Math.round((document.querySelectorAll('#rotina input:checked').length / boxes.length) * 100) : 0;
       document.getElementById('progressFill').style.width = pct + '%';
+    }
+
+    function toggleEdit() {
+      editMode = !editMode;
+      document.body.classList.toggle('edit-mode', editMode);
+      document.getElementById('btnEdit').textContent = editMode ? 'Salvar' : 'Editar rotina';
+      document.getElementById('btnAdd').style.display = editMode ? 'inline-block' : 'none';
+      if (!editMode) {
+        localStorage.setItem('customRoutine', JSON.stringify(routine));
+      }
+      renderSection('rotina', routine, 'rotina', true);
+    }
+
+    function updateTask(index, field, value) {
+      routine[index][field] = value;
+      localStorage.setItem('customRoutine', JSON.stringify(routine));
+    }
+
+    function deleteTask(index) {
+      if (confirm('Remover esta tarefa?')) {
+        routine.splice(index, 1);
+        localStorage.setItem('customRoutine', JSON.stringify(routine));
+        renderSection('rotina', routine, 'rotina', true);
+      }
+    }
+
+    function addTask() {
+      routine.push({ time: '12:00', title: 'Nova tarefa', cat: 'pessoal' });
+      localStorage.setItem('customRoutine', JSON.stringify(routine));
+      renderSection('rotina', routine, 'rotina', true);
     }
 
     function resetToday() {
